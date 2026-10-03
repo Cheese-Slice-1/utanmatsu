@@ -4,5 +4,7 @@ pkgs.mkShell {
   name = "odin-shell";
   packages = with pkgs; [
     odin
+    just
   ];
 }
+
