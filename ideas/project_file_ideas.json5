@@ -1,0 +1,68 @@
+{
+    // JSON5 for project files
+    
+    /*
+        NOTE: remember that for options that use arrays as values, if you want to change the Nth value and leave the rest as defaults, you must rpovide nulls
+        
+        example:
+            ...
+            notes: [
+                [null, null, 4] // usually ["あ", "C4", 4] but depends on the user/project config
+            ],
+            ...
+        
+        you *can't* use empty strings for the lyric nor the note. the only value that can be an empty string is the resampler flags string.
+    */
+    
+    // project tempo
+    tempo: 120.0, // default
+    
+    // project time signature
+    time: "4/4", // default
+    
+    // project configuration; tracks can define their own
+    config: {
+        resampler: "", // default; path or executable name
+        wavtool: "", // default; path or excutable name
+        flags: "", // default; list of flags
+        k2r: false // default; use rudimentary kana to romaji replacement
+    },
+    
+    tracks: [
+        {
+            // track name
+            name: "track name", // default is "track" followed by the index
+            
+            // name of the singer specified in the character.txt
+            singer: "デフォルト", // the default (has to be installed manually; default can be changed in config file)
+            
+            // path to pitch
+            pitch: "",
+            
+            // track configuration (same defaults as project configuration)
+            config: {
+                resampler: "worldline",
+                wavtool: "convergence",
+                flags: "",
+                k2r: false
+            },
+            
+            // NOTE: durations are either an integer (full 1/X note) or a floating point number (e.g.: 0.25 in 4/4 is a 1/16 note)
+            
+            // delay in note duration
+            delay: 0, // default
+            
+            notes: [
+                // note format is: [lyric, note, duration, flags, direct?]
+                ["あ", 1, "C4", "", false], // default; note names arecase insensitive 
+                ["R", 3], // rest; note can be whatever
+                ["こ", 1, "d4", "b40"], // case insensitive note names
+                ["ん", 1, "C4"], // or ["ん"], but it's more unstable as it uses user/project defaults
+                ["に", 1, "B3"],
+                ["ち", 1, "B3"],
+                ["わ", 2, "C4"]
+            ]
+        }
+    ]
+}
+

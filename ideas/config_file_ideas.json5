@@ -1,0 +1,37 @@
+{
+    // these overwrite utanmatsu's hard-coded defaults
+    
+    wine: {
+        path: "", // path or executable name
+        params: [""], // extra parameters passed to wine
+    },
+    
+    singers: "",
+    resamplers: "",
+    wavtools: "",
+    
+    default: {
+        tempo: 120.0,
+        time: "4/4",
+        config: {
+            resampler: "", // path or executable name
+            wavtool: "", // path or executable name
+            flags: "",
+            k2r: false
+        },
+        track: {
+            name: "track", // tracks use this followed by the index ("track1", "track2", "track3", etc.)
+            singer: "デフォルト",
+            pitch: "", // path to pitch string file. idk why you'd want to set this.
+            config: {
+                resampler: "", // path or executable name
+                wavtool: "", // path or executable name
+                flags: "",
+                k2r: false
+            },
+            delay: 0,
+            note: ["あ", "C4", 1, "", false]
+        }
+    }
+}
+

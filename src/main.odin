@@ -1,9 +1,13 @@
 package main
 
+import "core:encoding/json"
 import "core:fmt"
+import "core:os"
 
 main :: proc() {
     fmt.println("Hello, world!")
+    
+    
 }
 
 // open file
@@ -11,3 +15,4 @@ main :: proc() {
 // singers
 // resamplers
 // wavtools
+
