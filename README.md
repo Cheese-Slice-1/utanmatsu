@@ -1,2 +1,3 @@
-# What is this repository?
-An attempt at making a user-friendly TUI frontend for UTAU resamplers and wavtools. Basically OpenUTAU but 100% from the terminal.
+# What is utanmatsu?
+An attempt at making a user-friendly CLI frontend for UTAU resamplers and wavtools. Basically like every other UTAU frontend but 100% controlled from the terminal.
+
