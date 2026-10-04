@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
-  name = "odin-shell";
+  name = "utanmatsu-dev-shell";
   packages = with pkgs; [
     odin
     just

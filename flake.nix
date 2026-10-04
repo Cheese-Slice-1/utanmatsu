@@ -17,7 +17,7 @@
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        name = "seabun-dev-flake";
+        name = "utanmatsu-dev-flake";
         
         packages = (with pkgs; [
           #qemu # for testing other architectures
@@ -25,10 +25,6 @@
           odin
           just
         ])
-        #++ (with llvm21; [
-        #  lld # llvm linker
-        #  libllvm # necessary for the llvm-sys crate
-        #])
         ++ [ useEditor ];
         
         #shellHook = ''
