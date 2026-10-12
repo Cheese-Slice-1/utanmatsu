@@ -4,8 +4,12 @@ import "core:encoding/json"
 import "core:fmt"
 import "core:os"
 
+import "parse/oto"
+
 main :: proc() {
     fmt.println("Hello, world!")
+    
+    oto.test()
     
     test_file, read_err := os.read_entire_file("ideas/config_file_ideas.json5", context.allocator)
     if read_err != nil {

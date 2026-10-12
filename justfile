@@ -1,18 +1,26 @@
 set unstable
 
 help:
-    @echo to list available recipes run `just -l`
-    @echo to see available targets, run \"odin build src -target:?\"
-    @echo to see available microtargets, run \"odin build src -microarch:?\"
+    @echo List recipes and their short descriptions with \"just -l\"
+    @echo
+    @echo On running/building this project:
+    @echo '*' To run this project, run \"just run\" and pass \(or not\) parameters
+    @echo '*' To, instead, build this project, run \"just build\", or \"just build-for \[target]\" \(replace \"\[target]\"\)
+    @echo
+    @echo You can check all available targets with \"odin build -target:?\"
+    @echo If you want to build the project manually and see all available Odin commands and options, run \"odin help\"
 
-run ARGS="":
-    odin run src -- {{ARGS}}
+run args="":
+    odin run src -- {{args}}
+
+check:
+    odin check src -vet-unused
 
 # ----- UNIX-like-specific recipes -----
 
-# build directly for your system
 [unix]
 build:
+    mkdir -p bin
     odin build src -out:bin/utanmatsu
 
 # build for a specific target and microarchitecture
@@ -20,22 +28,19 @@ build:
 build-for target microarch="":
     @echo ~ building for {{target}}{{microarch && " with microarch " + microarch}} ~
     
-    -[ -d bin/{{target}} ] || mkdir bin/{{target}}
+    mkdir -p bin/{{target}}
     odin build src \
         -target:{{target}} \
         {{microarch && "-microarch:" + microarch}} \
         -out:bin/{{target}}/utanmatsu-{{target}}{{microarch && "-"+microarch}}
 
-# clean all executables
 [unix]
 clean:
-    rm bin/*/*
-    rm bin/utanmatsu
+    rm -r bin/*
 
 
 # ----- Windows-specific recipes -----
 
-# build directly for your system
 [windows]
 build:
     odin build src -out:bin\utanmatsu.exe
