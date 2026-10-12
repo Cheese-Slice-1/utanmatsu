@@ -1,22 +1,42 @@
 set unstable
 
-suffix := if os() == "windows" { ".exe" } else { "" }
-arch := `uname -m`
-
 help:
     @echo to list available recipes run `just -l`
-    @echo your os: {{os()}}
-    @echo your architecture: {{arch}}
-    -odin build src -target:?
-    -odin build src -microarch:?
+    @echo to see available targets, run \"odin build src -target:?\"
+    @echo to see available microtargets, run \"odin build src -microarch:?\"
 
-run:
-    odin run src
+run ARGS="":
+    odin run src -- {{ARGS}}
 
+# ----- UNIX-like-specific recipes -----
+
+# build directly for your system
+[unix]
 build:
     odin build src -out:bin/utanmatsu
 
-build-for TARGET MICROARCH="":
-    @echo building for {{TARGET}}{{MICROARCH && " with microarch " + MICROARCH}}
-    odin build src -target:{{TARGET}} {{MICROARCH && "-microarch:" + MICROARCH}} -out:bin/{{TARGET}}/utanmatsu-{{TARGET}}{{MICROARCH && ('-' + MICROARCH)}}{{suffix}}
+# build for a specific target and microarchitecture
+[unix]
+build-for target microarch="":
+    @echo ~ building for {{target}}{{microarch && " with microarch " + microarch}} ~
+    
+    -[ -d bin/{{target}} ] || mkdir bin/{{target}}
+    odin build src \
+        -target:{{target}} \
+        {{microarch && "-microarch:" + microarch}} \
+        -out:bin/{{target}}/utanmatsu-{{target}}{{microarch && "-"+microarch}}
+
+# clean all executables
+[unix]
+clean:
+    rm bin/*/*
+    rm bin/utanmatsu
+
+
+# ----- Windows-specific recipes -----
+
+# build directly for your system
+[windows]
+build:
+    odin build src -out:bin\utanmatsu.exe
 
