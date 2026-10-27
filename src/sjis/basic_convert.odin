@@ -25,7 +25,7 @@ from_utf8 :: proc(from: [2]u8) -> Maybe([2]u8) {
 }
 
 /*
-    sjis kana table
+    sjis kana and fullwidth latin table
     section taken from http://rikai.com/library/kanjitables/kanji_codes.sjis.shtml
     
     82 4f | ０ １ ２ ３ ４ ５ ６ ７ ８ ９                   
